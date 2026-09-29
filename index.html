@@ -1,6 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Della | Curls and colors</title>
+    <style>
+        /* BRANDING VARIABLES */
+        :root {
+            --brand-color: #111111; 
+            --bg-color: #f9f8f6;    
+            --text-color: #222222;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Montserrat:wght@300;400;500&display=swap');
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 20px 0; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background: #ffffff;
+            max-width: 550px;
+            width: 90%;
+            padding: 50px 40px;
+            border-radius: 4px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Branding & Logo Header */
+        .logo-container {
+            background-color: #000000; 
+            margin: -50px -40px 30px -40px; 
+            padding: 40px 20px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-container img {
+            max-width: 170px; 
+            height: auto;
+            display: block;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 5px;
+            color: var(--brand-color);
+        }
+
+        .slogan {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 40px;
+        }
+
+        /* Multi-Step Form Logic */
+        .form-step {
+            display: none;
+            animation: slideUp 0.6s ease-out forwards;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: var(--brand-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        input[type="text"], input[type="email"], select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #eaeaea;
+            border-radius: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            background-color: #fafafa;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--brand-color);
+            background-color: #fff;
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        button {
+            flex: 1;
+            padding: 15px;
+            background-color: var(--brand-color);
+            color: #fff;
+            border: 1px solid var(--brand-color);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button.outline {
+            background-color: transparent;
+            color: var(--brand-color);
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        /* Success & Links Section */
+        #success-message {
+            display: none;
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        .success-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--brand-color);
+            margin-bottom: 15px;
+        }
+
+        .success-text {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .link-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .link-menu a {
+            padding: 15px;
+            border: 1px solid var(--brand-color);
+            color: var(--brand-color);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .link-menu a:hover {
+            background-color: var(--brand-color);
+            color: #fff;
+        }
+
+        /* Branded Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--brand-color);
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--brand-color);
+            text-decoration: none;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.5;
+        }
+
+        .footer-copyright {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        
+        <!-- Logo Section with Black Header -->
+        <div class="logo-container">
+            <img src="logo.jpg" alt="Della Curls and Colors Logo">
+        </div>
+
+        <h1>Della</h1>
+        <div class="slogan">Curls and colors</div>
+
+        <form name="hair-assessment" id="hair-assessment">
+            
+            <!-- STEP 1: Contact -->
+            <div id="step-1" class="form-step active">
+                <div class="step-title">Step 1: Your Details</div>
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" name="name" required placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone" required placeholder="Enter your phone number">
+                </div>
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" required placeholder="Enter your email">
+                </div>
+                
+                <div class="btn-group">
+                    <button type="button" onclick="nextStep(2)">Next Step</button>
+                </div>
+            </div>
+
+            <!-- STEP 2: The Canvas -->
+            <div id="step-2" class="form-step">
+                <div class="step-title">Step 2: The Canvas</div>
+                
+                <div class="form-group">
+                    <label>Natural Texture</label>
+                    <select name="texture" required>
+                        <option value="" disabled selected>Select your natural texture</option>
+                        <option value="Straight">Straight</option>
+                        <option value="Wavy">Wavy</option>
+                        <option value="Curly">Curly</option>
+                        <option value="Coily">Coily</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Chemical History (Past 3 Years)</label>
+                    <textarea name="history" rows="3" required placeholder="Have you used any box dye, bleach, or chemical treatments?"></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="outline" onclick="prevStep(1)">Back</button>
+                    <button type="button" onclick="nextStep(3)">Next Step</button>
+                </div>
+            </div>
+
+            <!-- STEP 3: The Vision -->
+            <div id="step-3" class="form-step">
+                <div class="step-title">Step 3: The Vision</div>
+                
+                <div class="form-group">
+                    <label>What is your ultimate color goal?</label>
+                    <textarea name="goals" rows="3" required placeholder="Tell us about the dream hair you want to achieve..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="outline" onclick="prevStep(2)">Back</button>
+                    <button type="submit" id="submit-btn">Submit Canvas</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- SUCCESS SCREEN & LINKS -->
+        <div id="success-message">
+            <div class="success-title">Thank You.</div>
+            <div class="success-text">
+                Your canvas is being reviewed. The studio will reach out shortly to design your custom roadmap. While you wait, explore the world of custom color.
+            </div>
+            
+            <div class="link-menu">
+                <a href="https://shondellslaughter.com" target="_blank">Return to Link-in-Bio</a>
+            </div>
+        </div>
+
+        <!-- NEW BRANDED FOOTER -->
+        <div class="footer">
+            <div class="footer-brand">Della</div>
+            <div class="footer-links">
+                <a href="https://shondellslaughter.com" target="_blank">Website</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://your-newsletter-link.com" target="_blank">Newsletter</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Della Curls and Colors. Texas Exclusive Custom Color.
+            </div>
+        </div>
+
+    </div>
+
     <!-- Script to Handle Multi-Step Logic and Google Sheets Submission -->
     <script>
-        // Connected to Della Client Assessments
+        // YOUR EXACT GOOGLE SCRIPT URL
         const scriptURL = 'https://script.google.com/macros/s/AKfycbx6zprlAcnTvbjZczxnxQoP3rMY4tbE52Yo31Srf6qLOZEvqNGbIU9GyyGg8xfB-har/exec'; 
         
         const form = document.forms['hair-assessment'];
@@ -45,3 +394,5 @@
                 });
         });
     </script>
+</body>
+</html>
