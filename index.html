@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Della | Curls and colors</title>
     <style>
-        /* BRANDING VARIABLES - Change these to match Della's exact colors */
+        /* BRANDING VARIABLES */
         :root {
-            --brand-color: #111111; /* Replace #111111 with Della's primary brand hex code if you have it in your "Della " file */
-            --bg-color: #f9f8f6;    /* The warm off-white background */
+            --brand-color: #111111; 
+            --bg-color: #f9f8f6;    
             --text-color: #222222;
         }
 
@@ -38,14 +38,20 @@
             overflow: hidden;
         }
 
-        /* Branding & Logo */
+        /* Branding & Logo Header (Now Black) */
         .logo-container {
-            margin-bottom: 20px;
+            background-color: #000000; /* Deep black to blend the logo seamlessly */
+            margin: -50px -40px 30px -40px; /* Stretches header to the edges of the white card */
+            padding: 40px 20px; /* Spacing inside the black header */
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .logo-container img {
-            max-width: 150px; /* Adjust this number to make her logo bigger or smaller */
+            max-width: 170px; /* Slightly larger for a bold header presence */
             height: auto;
+            display: block;
         }
 
         h1 {
@@ -202,7 +208,7 @@
 
     <div class="container">
         
-        <!-- Logo Section Active -->
+        <!-- Logo Section with Black Header -->
         <div class="logo-container">
             <img src="logo.jpg" alt="Della Curls and Colors Logo">
         </div>
@@ -303,6 +309,23 @@
         const submitBtn = document.getElementById('submit-btn');
 
         function nextStep(stepNumber) {
+            // Find the current step we are on before moving to the next one
+            const currentStepNumber = stepNumber - 1;
+            const currentStep = document.getElementById('step-' + currentStepNumber);
+            
+            // Find all required fields in the current step
+            const inputs = currentStep.querySelectorAll('input[required], select[required], textarea[required]');
+            
+            // Check if any of them are empty
+            for (let i = 0; i < inputs.length; i++) {
+                if (!inputs[i].checkValidity()) {
+                    // Triggers the built-in browser warning tooltip
+                    inputs[i].reportValidity(); 
+                    return; // Stops the function so they cannot go to the next step
+                }
+            }
+
+            // If everything is filled out, move to the next step
             document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
             document.getElementById('step-' + stepNumber).classList.add('active');
         }
