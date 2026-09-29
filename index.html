@@ -19,7 +19,7 @@
             color: var(--text-color);
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px 0; /* Added padding so it doesn't touch the top/bottom on small screens */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -38,18 +38,18 @@
             overflow: hidden;
         }
 
-        /* Branding & Logo Header (Now Black) */
+        /* Branding & Logo Header */
         .logo-container {
-            background-color: #000000; /* Deep black to blend the logo seamlessly */
-            margin: -50px -40px 30px -40px; /* Stretches header to the edges of the white card */
-            padding: 40px 20px; /* Spacing inside the black header */
+            background-color: #000000; 
+            margin: -50px -40px 30px -40px; 
+            padding: 40px 20px; 
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .logo-container img {
-            max-width: 170px; /* Slightly larger for a bold header presence */
+            max-width: 170px; 
             height: auto;
             display: block;
         }
@@ -195,12 +195,51 @@
             color: #fff;
         }
 
+        /* Branded Footer */
         .footer {
-            margin-top: 40px;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #eaeaea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .footer-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--brand-color);
+            letter-spacing: 1px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: var(--brand-color);
+            text-decoration: none;
             font-size: 0.75rem;
-            color: #ccc;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.5;
+        }
+
+        .footer-copyright {
+            font-size: 0.7rem;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
         }
     </style>
 </head>
@@ -293,8 +332,17 @@
             </div>
         </div>
 
+        <!-- NEW BRANDED FOOTER -->
         <div class="footer">
-            Texas Exclusive Custom Color
+            <div class="footer-brand">Della</div>
+            <div class="footer-links">
+                <a href="https://shondellslaughter.com" target="_blank">Website</a>
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://your-newsletter-link.com" target="_blank">Newsletter</a>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Della Curls and Colors. Texas Exclusive Custom Color.
+            </div>
         </div>
 
     </div>
@@ -309,23 +357,18 @@
         const submitBtn = document.getElementById('submit-btn');
 
         function nextStep(stepNumber) {
-            // Find the current step we are on before moving to the next one
             const currentStepNumber = stepNumber - 1;
             const currentStep = document.getElementById('step-' + currentStepNumber);
             
-            // Find all required fields in the current step
             const inputs = currentStep.querySelectorAll('input[required], select[required], textarea[required]');
             
-            // Check if any of them are empty
             for (let i = 0; i < inputs.length; i++) {
                 if (!inputs[i].checkValidity()) {
-                    // Triggers the built-in browser warning tooltip
                     inputs[i].reportValidity(); 
-                    return; // Stops the function so they cannot go to the next step
+                    return; 
                 }
             }
 
-            // If everything is filled out, move to the next step
             document.querySelectorAll('.form-step').forEach(step => step.classList.remove('active'));
             document.getElementById('step-' + stepNumber).classList.add('active');
         }
